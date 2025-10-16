@@ -10,12 +10,12 @@
     // ============ STYLES ============
     const styles = `
         #doc-chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-        #chat-button { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
-        #chat-button:hover { transform: scale(1.1); }
+        #chat-button { width: 60px; height: 48px; border-radius: 12px; background: #ff4b33; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 75, 51, 0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        #chat-button:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(255, 75, 51, 0.4); }
         #chat-button svg { width: 30px; height: 30px; fill: white; }
         #chat-window { display: none; position: fixed; bottom: 90px; right: 20px; width: 380px; height: 550px; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); flex-direction: column; overflow: hidden; }
         #chat-window.open { display: flex; }
-        #chat-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        #chat-header { background: #ff4b33; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
         #chat-header h3 { margin: 0; font-size: 16px; font-weight: 600; }
         #close-chat { background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
         #chat-messages { flex: 1; overflow-y: auto; padding: 20px; background: #f7f7f8; }
@@ -23,16 +23,16 @@
         .chat-message.user { flex-direction: row-reverse; }
         .message-content { max-width: 75%; padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 14px; white-space: pre-wrap; }
         .chat-message.assistant .message-content { background: white; color: #333; border-bottom-left-radius: 4px; }
-        .chat-message.user .message-content { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-bottom-right-radius: 4px; }
+        .chat-message.user .message-content { background: #ff4b33; color: white; border-bottom-right-radius: 4px; }
         #chat-input-container { padding: 16px; background: white; border-top: 1px solid #e5e5e5; }
         #chat-input-form { display: flex; gap: 8px; }
         #chat-input { flex: 1; padding: 12px; border: 1px solid #e5e5e5; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; }
-        #chat-input:focus { border-color: #667eea; }
-        #send-button { padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: opacity 0.3s ease; }
+        #chat-input:focus { border-color: #ff4b33; }
+        #send-button { padding: 12px 20px; background: #ff4b33; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: opacity 0.3s ease; }
         #send-button:hover:not(:disabled) { opacity: 0.9; }
         #send-button:disabled { opacity: 0.6; cursor: not-allowed; }
         .typing-indicator { display: flex; gap: 4px; padding: 12px 16px; background: white; border-radius: 12px; width: fit-content; }
-        .typing-indicator span { width: 8px; height: 8px; background: #667eea; border-radius: 50%; animation: typing 1.4s infinite; }
+        .typing-indicator span { width: 8px; height: 8px; background: #ff4b33; border-radius: 50%; animation: typing 1.4s infinite; }
         .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
         .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
         @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.7; } 30% { transform: translateY(-10px); opacity: 1; } }
