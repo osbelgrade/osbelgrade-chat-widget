@@ -1,4 +1,4 @@
-// OS:Belgrade Chat Widget - Production Version
+// OS:Belgrade Chat Widget - Production Version with Markdown Support
 // This version calls your deployed backend API
 
 (function() {
@@ -21,7 +21,13 @@
         #chat-messages { flex: 1; overflow-y: auto; padding: 20px; background: #f7f7f8; }
         .chat-message { margin-bottom: 16px; display: flex; gap: 10px; }
         .chat-message.user { flex-direction: row-reverse; }
-        .message-content { max-width: 75%; padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 14px; white-space: pre-wrap; }
+        .message-content { max-width: 75%; padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 14px; }
+        .message-content strong { font-weight: 600; }
+        .message-content h2 { font-size: 16px; font-weight: 600; margin: 12px 0 8px 0; }
+        .message-content h3 { font-size: 14px; font-weight: 600; margin: 10px 0 6px 0; }
+        .message-content ul, .message-content ol { margin: 8px 0; padding-left: 20px; }
+        .message-content li { margin: 4px 0; }
+        .message-content code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 13px; }
         .chat-message.assistant .message-content { background: white; color: #333; border-bottom-left-radius: 4px; }
         .chat-message.user .message-content { background: #ff4b33; color: white; border-bottom-right-radius: 4px; }
         #chat-input-container { padding: 16px; background: white; border-top: 1px solid #e5e5e5; }
@@ -74,6 +80,28 @@ What would you like to know?</div>
             </div>
         </div>
     `;
+
+    // ============ MARKDOWN PARSER ============
+    function parseMarkdown(text) {
+        // Convert markdown to HTML
+        let html = text;
+        
+        // Headers
+        html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+        html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+        
+        // Bold
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        // Lists
+        html = html.replace(/^\- (.*$)/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+        
+        // Line breaks
+        html = html.replace(/\n\n/g, '<br><br>');
+        
+        return html;
+    }
 
     // ============ INITIALIZATION ============
     function init() {
@@ -170,7 +198,13 @@ What would you like to know?</div>
         
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        contentDiv.textContent = content;
+        
+        // Parse markdown for assistant messages
+        if (role === 'assistant') {
+            contentDiv.innerHTML = parseMarkdown(content);
+        } else {
+            contentDiv.textContent = content;
+        }
         
         messageDiv.appendChild(contentDiv);
         chatMessages.appendChild(messageDiv);
