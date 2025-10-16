@@ -10,9 +10,10 @@
     // ============ STYLES ============
     const styles = `
         #doc-chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-        #chat-button { width: 60px; height: 48px; border-radius: 12px; background: #ff4b33; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 75, 51, 0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        #chat-button { min-width: 120px; height: 48px; border-radius: 24px; background: #ff4b33; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 75, 51, 0.3); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         #chat-button:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(255, 75, 51, 0.4); }
-        #chat-button svg { width: 30px; height: 30px; fill: white; }
+        #chat-button svg { width: 24px; height: 24px; fill: white; flex-shrink: 0; }
+        #chat-button span { color: white; font-weight: 600; font-size: 15px; white-space: nowrap; }
         #chat-window { display: none; position: fixed; bottom: 90px; right: 20px; width: 380px; height: 550px; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); flex-direction: column; overflow: hidden; }
         #chat-window.open { display: flex; }
         #chat-header { background: #ff4b33; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -48,19 +49,20 @@
     // ============ HTML STRUCTURE ============
     const widgetHTML = `
         <div id="doc-chat-widget">
-            <button id="chat-button" aria-label="Open chat">
+            <button id="chat-button" aria-label="Ask Zora">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
                 </svg>
+                <span>Ask Zora</span>
             </button>
             <div id="chat-window">
                 <div id="chat-header">
-                    <h3>OS:Belgrade Assistant</h3>
+                    <h3>Zora - OS:Belgrade Assistant</h3>
                     <button id="close-chat" aria-label="Close chat">&times;</button>
                 </div>
                 <div id="chat-messages">
                     <div class="chat-message assistant">
-                        <div class="message-content">Hi! I'm your OS:Belgrade documentation assistant. I can help you with:
+                        <div class="message-content">Hi! I'm Zora, your OS:Belgrade documentation assistant. I can help you with:
 
 • Project setup and structure
 • Technical documentation
@@ -73,7 +75,7 @@ What would you like to know?</div>
                 </div>
                 <div id="chat-input-container">
                     <form id="chat-input-form">
-                        <input type="text" id="chat-input" placeholder="Ask about the docs..." autocomplete="off"/>
+                        <input type="text" id="chat-input" placeholder="Ask Zora anything..." autocomplete="off"/>
                         <button type="submit" id="send-button">Send</button>
                     </form>
                 </div>
